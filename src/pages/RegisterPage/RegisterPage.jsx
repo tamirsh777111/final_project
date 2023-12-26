@@ -4,13 +4,25 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
+// import Link from "@mui/material/Link";
+import { Link, useNavigate } from "react-router-dom";
+
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 
+import ROUTES from "../../routes/ROUTES";
+
 const RegisterPage = () => {
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // status ik from server
+    navigate(ROUTES.LOGIN);
+  };
+
   const [inputsValue, setInputsValue] = useState({
     first: "",
     middle: "",
@@ -53,6 +65,7 @@ const RegisterPage = () => {
     // }));
 
     // final boss
+
     setInputsValue((CopyOfCurrentValue) => ({
       ...CopyOfCurrentValue,
       [e.target.id]: e.target.value,
@@ -73,7 +86,7 @@ const RegisterPage = () => {
       <Typography component="h1" variant="h5">
         Sign up
       </Typography>
-      <Box component="form" noValidate sx={{ mt: 3 }}>
+      <Box component="form" noValidate sx={{ mt: 3 }} onSubmit={handleSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={4}>
             <TextField
@@ -83,7 +96,7 @@ const RegisterPage = () => {
               fullWidth
               id="first"
               label="First Name"
-              autoFocus
+              // autoFocus
               value={inputsValue.first}
               onChange={handleInputsChange}
             />
@@ -95,7 +108,7 @@ const RegisterPage = () => {
               fullWidth
               id="middle"
               label="Middle Name"
-              autoFocus
+              // autoFocus
               value={inputsValue.middle}
               onChange={handleInputsChange}
             />
@@ -258,7 +271,7 @@ const RegisterPage = () => {
         </Button>
         <Grid container justifyContent="flex-end">
           <Grid item>
-            <Link href="#" variant="body2">
+            <Link to={ROUTES.LOGIN} variant="body2">
               Already have an account? Sign in
             </Link>
           </Grid>

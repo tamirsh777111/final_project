@@ -2,7 +2,8 @@ const ROUTES = {
   HOME: "/",
   REGISTER: "/register",
   LOGIN: "/login",
-  EDITCARD: "/editcard",
+  ABOUT: "/about",
+  EDITCARD: "/edit-card",
   CREATECARD: "/createcard",
   SANDBOX: "/sandbox",
 };

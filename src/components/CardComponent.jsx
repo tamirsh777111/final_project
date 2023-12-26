@@ -1,3 +1,7 @@
+// import ROUTES from "../../routes/ROUTES";
+import ROUTES from "../routes/ROUTES";
+import { useNavigate } from "react-router-dom";
+
 import {
   Card,
   CardHeader,
@@ -37,10 +41,13 @@ const CardComponent = ({
     console.log("click in delete", id);
     onDelete(id);
   };
+  const navigate = useNavigate();
 
   const handleEditClick = () => {
     console.log("click in edit", id);
     onEdit(id);
+    // navigate(ROUTES.EDITCARD);
+    navigate(`${ROUTES.EDITCARD}/:id`);
   };
   const handleCallClick = () => {
     console.log("click in call", id);

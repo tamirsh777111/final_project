@@ -1,15 +1,15 @@
 import { useState } from "react";
-import LoginPage from "../pages/LoginPage/LoginPage";
-import RegisterPage from "../pages/RegisterPage/RegisterPage";
+// import LoginPage from "../pages/LoginPage/LoginPage";
+// import RegisterPage from "../pages/RegisterPage/RegisterPage";
 import FooterComponent from "./footer/FooterComponent";
 import HeaderComponent from "./header/HeaderComponent";
 import MainComponent from "./main/MainComponent";
-import HomePage from "../pages/HomePage/HomePage";
+// import HomePage from "../pages/HomePage/HomePage";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import tmc from "twin-moon-color";
 import CssBaseline from "@mui/material/CssBaseline";
 
-const LayoutComponent = () => {
+const LayoutComponent = ({ children }) => {
   const themes = tmc({
     "text.headerColorColor": "!gray",
     "text.headerActive": "*white",
@@ -30,11 +30,9 @@ const LayoutComponent = () => {
         isDarkTheme={isDarkTheme}
         onThemeChange={handleThemeChange}
       />
-      <LoginPage />
-      <RegisterPage />
-      <MainComponent>
-        <HomePage />
-      </MainComponent>
+      {/* <LoginPage />
+      <RegisterPage /> */}
+      <MainComponent>{children} </MainComponent>
       <FooterComponent />
     </ThemeProvider>
   );

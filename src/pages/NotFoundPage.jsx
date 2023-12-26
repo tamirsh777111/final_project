@@ -1,6 +1,6 @@
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import WavingHandIcon from "@mui/icons-material/WavingHand";
+import DangerousIcon from "@mui/icons-material/Dangerous";
 import IconButton from "@mui/material/IconButton";
 
 const NotFoundPage = () => {
@@ -16,10 +16,10 @@ const NotFoundPage = () => {
       }}
     >
       <Grid item lg={3} md={6} xs={12}></Grid>
-      <Typography variant="h1">Hello</Typography>
+      <Typography variant="h1">404 Not Found</Typography>
       <Grid item lg={3} md={6} xs={12}>
         <IconButton>
-          <WavingHandIcon sx={{ fontSize: 200, color: "#1976D2" }} />
+          <DangerousIcon sx={{ fontSize: 200, color: "#1976D2" }} />
         </IconButton>
       </Grid>
     </Grid>
