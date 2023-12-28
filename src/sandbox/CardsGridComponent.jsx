@@ -1,6 +1,6 @@
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import CardComponent from "./CardComponent";
+import CardComponent from "../components/CardComponent";
 import car1 from "../assets/imgs/car1.jpg";
 import car2 from "../assets/imgs/car2.jpg";
 import car3 from "../assets/imgs/car3.jpg";
