@@ -1,13 +1,11 @@
 import { Fragment, useEffect, useState } from "react";
 import { Typography, Button } from "@mui/material";
-import ComponentToKillComponent from "../components/ComponentToKillComponent";
 
 const LifeCycleHooksPage = () => {
   const [count, setCount] = useState(() => {
     console.log("initial state");
     return 0;
   });
-  const [show, setShow] = useState(true);
   useEffect(() => {
     /* will work every time state update */
     console.log("useEffect");
@@ -23,9 +21,6 @@ const LifeCycleHooksPage = () => {
     setCount((currentCount) => currentCount + 1);
     console.log("count from handleBtnClick", count);
   };
-  const handleToggleBtnClick = () => {
-    setShow(!show);
-  };
   console.log("from logic");
   return (
     <Fragment>
@@ -34,10 +29,6 @@ const LifeCycleHooksPage = () => {
         +1
       </Button>
       <Typography>LifeCycleHooksPage, count: {count}</Typography>
-      <Button variant="contained" onClick={handleToggleBtnClick}>
-        toggle
-      </Button>
-      {show && <ComponentToKillComponent />}
     </Fragment>
   );
 };
