@@ -45,9 +45,10 @@ const CardComponent = ({
 
   const handleEditClick = () => {
     console.log("click in edit", id);
+
     onEdit(id);
     // navigate(ROUTES.EDITCARD);
-    navigate(`${ROUTES.EDITCARD}/:id`);
+    navigate(`${ROUTES.EDITCARD}/${id}`);
   };
   const handleCallClick = () => {
     console.log("click in call", id);

@@ -3,6 +3,8 @@ import { Fragment } from "react";
 import styles from "./FirstComponent.module.css";
 // import "./FirstComponent.css";
 
+// import { Outlet } from "react-router-dom";
+
 const FirstComponent = () => {
   /* logic section */
   console.log("is it working");
@@ -11,6 +13,7 @@ const FirstComponent = () => {
     <Fragment>
       <h1 style={{ color: "green", backgroundColor: "darkviolet" }}>Yey</h1>
       <h2 className={styles.h2}>the name is {name}</h2>
+      {/* <Outlet /> */}
     </Fragment>
   );
 };

@@ -34,6 +34,7 @@ import NotFoundPage from "../pages/NotFoundPage";
 import ROUTES from "./ROUTES";
 import AboutUsPage from "../pages/AboutUsPage";
 import EditCardPage from "../pages/EditCardPage";
+// import FirstComponent from "../sandbox/FirstComponent";
 
 const Router = () => {
   return (
@@ -43,11 +44,22 @@ const Router = () => {
       <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
       <Route path={ROUTES.ABOUT} element={<AboutUsPage />} />
       {/* <Route path="/edit/:id" element={<EditCardPage />} /> */}
-
       {/* !true way */}
       {/* <Route path={`${ROUTES.EDITCARD}/:id`} element={<EditCardPage />} /> */}
-
       <Route path={ROUTES.EDITCARD} element={<EditCardPage />} />
+
+      {/* 
+      
+      //Route in Route: */}
+
+      {/* <Route path="/sandbox">
+
+// outlet:
+      {/* <Route path="/sandbox" element={<FirstComponent />} />
+      
+      
+      <Route path="first-component" element={<FirstComponent />} />
+      </Route> */}
 
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
