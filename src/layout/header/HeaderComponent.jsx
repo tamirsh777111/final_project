@@ -15,7 +15,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { Switch } from "@mui/material";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 // import ROUTES from "../../routes/ROUTES";
 // import NavLinkComponent from "./NavLinkComponent";
 // import nextKey from "generate-my-key";
@@ -29,6 +29,7 @@ import Links from "./ui/Links";
 import LeftDrawerComponent from "./ui/LeftDrawerComponent";
 import { useState } from "react";
 import FilterComponent from "./ui/FilterComponent";
+import ROUTES from "../../routes/ROUTES";
 
 const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -154,14 +155,17 @@ const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
+          {/* <Typography
             variant="h6"
             noWrap
             component="div"
             sx={{ display: { xs: "none", sm: "block" } }}
           >
             LOGO
-          </Typography>
+          </Typography> */}
+          <Link to={ROUTES.HOME}>
+            <img src="/assets/imgs/mainLogoNew.png" alt="LOGO" />
+          </Link>
           <Links />
           <FilterComponent />
           <Box
