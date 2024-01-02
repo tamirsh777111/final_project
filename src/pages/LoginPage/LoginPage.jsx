@@ -30,10 +30,20 @@ const LoginPage = () => {
     e.preventDefault(); // stop refresh
     //status ok from server
     try {
-      let { data } = await axios.post("/users/login", {
-        email: emailValue,
-        password: passwordValue,
-      });
+      let { data } = await axios.post(
+        "/users/login",
+        {
+          email: emailValue,
+          password: passwordValue,
+        },
+        {
+          headers: {
+            "x-auth-token": localStorage.getItem("token"),
+          },
+        }
+      );
+      console.log("data from axios", data);
+      localStorage.setItem("token", data);
       navigate(ROUTES.HOME);
     } catch (err) {
       console.log("err from axios", err);

@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import { Typography, Button } from "@mui/material";
-import ComponentToKillComponent from "../components/ComponentToKillComponent";
+import ComponentToKillComponent from "../sandbox/ComponentToKillComponent";
 
 const LifeCycleHooksPage = () => {
   const [count, setCount] = useState(() => {

@@ -36,6 +36,10 @@ import AboutUsPage from "../pages/AboutUsPage";
 import EditCardPage from "../pages/EditCardPage";
 // import FirstComponent from "../sandbox/FirstComponent";
 
+import SandboxPage from "../sandbox/SandboxPage";
+import LifeCycleHooksPage from "../sandbox/LifeCycleHooksPage";
+import ContextPage from "../sandbox/ContextPage";
+
 const Router = () => {
   return (
     <Routes>
@@ -60,6 +64,11 @@ const Router = () => {
       
       <Route path="first-component" element={<FirstComponent />} />
       </Route> */}
+
+      <Route path="/sandbox" element={<SandboxPage />}>
+        <Route path="lch" element={<LifeCycleHooksPage />} />
+      </Route>
+      <Route path="/context" element={<ContextPage />} />
 
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
