@@ -16,6 +16,7 @@ import Typography from "@mui/material/Typography";
 import CopyrightComponent from "./ui/CopyrightComponent";
 
 import ROUTES from "../../routes/ROUTES";
+import axios from "axios";
 
 const LoginPage = () => {
   /* top lvl for hooks */
@@ -25,10 +26,18 @@ const LoginPage = () => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // status ik from server
-    navigate(ROUTES.HOME);
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // stop refresh
+    //status ok from server
+    try {
+      let { data } = await axios.post("/users/login", {
+        email: emailValue,
+        password: passwordValue,
+      });
+      navigate(ROUTES.HOME);
+    } catch (err) {
+      console.log("err from axios", err);
+    }
   };
   /**
    * const emailArrState = useState("")

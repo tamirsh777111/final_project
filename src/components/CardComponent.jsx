@@ -82,7 +82,10 @@ const CardComponent = ({
           <Typography component="span" fontWeight={700}>
             Address:{" "}
           </Typography>
-          {address.city}
+          {`city - ${address.city}
+           | street - ${address.street} 
+           | house number - ${address.houseNumber}  | zip -  
+          ${address.zip}`}
         </Typography>
         <Typography>
           <Typography component="span" fontWeight={700}>

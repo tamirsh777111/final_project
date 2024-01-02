@@ -6,6 +6,8 @@ import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 import EmailIcon from "@mui/icons-material/Email";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import { Link } from "react-router-dom";
+import { memo } from "react";
+import styles from "../footer/FooterComponent.module.css";
 
 const FooterComponent = () => {
   return (
@@ -27,21 +29,24 @@ const FooterComponent = () => {
           alignItems: "center",
         }}
       >
-        <Link to="tel:0525338532">
+        <Link to="tel:0525338532" className={styles.h2}>
           <BottomNavigationAction
             label="Phone"
             icon={<PhoneInTalkIcon sx={{ fontSize: 40 }} />}
           />
           Phone
         </Link>
-        <Link to="mailto:tamirsh777111@gmail.com">
+        <Link to="mailto:tamirsh777111@gmail.com" className={styles.h2}>
           <BottomNavigationAction
             label="Email"
             icon={<EmailIcon sx={{ fontSize: 40 }} />}
           />
           Email
         </Link>
-        <Link to="https://api.whatsapp.com/send?phone=0525338532&text=שלום, איך אפשר לעזור">
+        <Link
+          to="https://api.whatsapp.com/send?phone=0525338532&text=שלום, איך אפשר לעזור"
+          className={styles.h2}
+        >
           <BottomNavigationAction
             label="WhatsApp"
             icon={<WhatsAppIcon sx={{ fontSize: 40 }} />}
@@ -53,4 +58,4 @@ const FooterComponent = () => {
   );
 };
 
-export default FooterComponent;
+export default memo(FooterComponent);

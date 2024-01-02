@@ -4,72 +4,48 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-// import Link from "@mui/material/Link";
 import { Link, useNavigate } from "react-router-dom";
-
+import axios from "axios";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-
 import ROUTES from "../../routes/ROUTES";
+import normalizeRegister from "./normalizeRegister";
 
 const RegisterPage = () => {
-  const navigate = useNavigate();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // status ik from server
-    navigate(ROUTES.LOGIN);
-  };
-
+  //eman, asaf, rawunak
   const [inputsValue, setInputsValue] = useState({
     first: "",
     middle: "",
     last: "",
     email: "",
     password: "",
-    Phone: "",
+    phone: "",
     url: "",
     alt: "",
-    State: "",
+    state: "",
     country: "",
     city: "",
     street: "",
     houseNumber: "",
     zip: "",
   });
+  const navigate = useNavigate();
   const handleInputsChange = (e) => {
-    /**
-     * e.target.id -> name of property to update
-     * e.target.value -> the value
-     */
-
-    // step 1
-    // setInputsValue((CopyOfCurrentValue) => {
-    // CopyOfCurrentValue.first = e.target.value;
-    // return CopyOfCurrentValue; //x
-    // return { ...CopyOfCurrentValue }; //v
-    // });
-
-    // step 2
-    // setInputsValue((CopyOfCurrentValue) => {
-    //   CopyOfCurrentValue[e.target.id] = e.target.value;
-    //   return { ...CopyOfCurrentValue };
-    // });
-
-    // step 3
-    // setInputsValue((CopyOfCurrentValue) => ({
-    //   ...CopyOfCurrentValue,
-    //   first: e.target.value,
-    // }));
-
-    // final boss
-
     setInputsValue((CopyOfCurrentValue) => ({
       ...CopyOfCurrentValue,
       [e.target.id]: e.target.value,
     }));
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post("/users", normalizeRegister(inputsValue));
+      navigate(ROUTES.LOGIN);
+    } catch (err) {
+      console.log("error from axios", err);
+    }
   };
   return (
     <Box
