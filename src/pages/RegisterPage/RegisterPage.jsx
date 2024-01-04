@@ -12,6 +12,15 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import ROUTES from "../../routes/ROUTES";
 import normalizeRegister from "./normalizeRegister";
+import Alert from "@mui/material/Alert";
+import { toast } from "react-toastify";
+
+import {
+  validateEmailLogin,
+  validatePasswordLogin,
+  validateFirstSchema,
+  validateSchema,
+} from "../../validation/registerValidation";
 
 const RegisterPage = () => {
   //eman, asaf, rawunak
@@ -31,17 +40,75 @@ const RegisterPage = () => {
     houseNumber: "",
     zip: "",
   });
+
+  const [errors, setErrors] = useState({
+    first: "",
+    last: "",
+    email: "",
+    password: "",
+    phone: "",
+    country: "",
+    city: "",
+    street: "",
+    houseNumber: "",
+    zip: "",
+  });
+
   const navigate = useNavigate();
+
   const handleInputsChange = (e) => {
     setInputsValue((CopyOfCurrentValue) => ({
       ...CopyOfCurrentValue,
       [e.target.id]: e.target.value,
     }));
   };
+
+  const handleInputsBlur = (e) => {
+    /**
+     * validateSchema[e.target.id] -> function to validate the current input
+     * inputsValue[e.target.id] -> the value inside the input
+     */
+    let dataFromJoi = validateSchema[e.target.id]({
+      [e.target.id]: inputsValue[e.target.id],
+    });
+    /*
+      {email:emailValue}
+    */
+    console.log("dataFromJoi", dataFromJoi);
+    if (dataFromJoi.error) {
+      // setPasswordError(dataFromJoi.error.details[0].message);
+      setErrors((copyOfErrors) => ({
+        ...copyOfErrors,
+        [e.target.id]: dataFromJoi.error.details[0].message,
+      }));
+    } else {
+      setErrors((copyOfErrors) => {
+        delete copyOfErrors[e.target.id];
+        return { ...copyOfErrors };
+      });
+    }
+    // if (dataFromJoi.error) {
+    //   setPasswordError(dataFromJoi.error.details[0].message);
+    // } else {
+    //   setPasswordError("");
+    // }
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await axios.post("/users", normalizeRegister(inputsValue));
+
+      toast("🦄 Register Successfully!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+
       navigate(ROUTES.LOGIN);
     } catch (err) {
       console.log("error from axios", err);
@@ -75,7 +142,9 @@ const RegisterPage = () => {
               // autoFocus
               value={inputsValue.first}
               onChange={handleInputsChange}
+              onBlur={handleInputsBlur}
             />
+            {errors.first && <Alert severity="error">{errors.first}</Alert>}
           </Grid>
           <Grid item xs={12} sm={4}>
             <TextField
@@ -99,7 +168,9 @@ const RegisterPage = () => {
               autoComplete="family-name"
               value={inputsValue.last}
               onChange={handleInputsChange}
+              onBlur={handleInputsBlur}
             />
+            {errors.last && <Alert severity="error">{errors.last}</Alert>}
           </Grid>
           <Grid item xs={12} sm={4}>
             <TextField
@@ -111,7 +182,9 @@ const RegisterPage = () => {
               autoComplete="email"
               value={inputsValue.email}
               onChange={handleInputsChange}
+              onBlur={handleInputsBlur}
             />
+            {errors.email && <Alert severity="error">{errors.email}</Alert>}
           </Grid>
           <Grid item xs={12} sm={4}>
             <TextField
@@ -124,7 +197,11 @@ const RegisterPage = () => {
               autoComplete="new-password"
               value={inputsValue.password}
               onChange={handleInputsChange}
+              onBlur={handleInputsBlur}
             />
+            {errors.password && (
+              <Alert severity="error">{errors.password}</Alert>
+            )}
           </Grid>
           <Grid item xs={12} sm={4}>
             <TextField
@@ -136,7 +213,9 @@ const RegisterPage = () => {
               autoComplete="new-phone"
               value={inputsValue.phone}
               onChange={handleInputsChange}
+              onBlur={handleInputsBlur}
             />
+            {errors.phone && <Alert severity="error">{errors.phone}</Alert>}
           </Grid>
           <Grid item xs={12} sm={4}>
             <TextField
@@ -181,7 +260,9 @@ const RegisterPage = () => {
               autoComplete="new-country"
               value={inputsValue.country}
               onChange={handleInputsChange}
+              onBlur={handleInputsBlur}
             />
+            {errors.country && <Alert severity="error">{errors.country}</Alert>}
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
@@ -193,7 +274,9 @@ const RegisterPage = () => {
               autoComplete="new-city"
               value={inputsValue.city}
               onChange={handleInputsChange}
+              onBlur={handleInputsBlur}
             />
+            {errors.city && <Alert severity="error">{errors.city}</Alert>}
           </Grid>
           <Grid item xs={12} sm={4}>
             <TextField
@@ -205,7 +288,9 @@ const RegisterPage = () => {
               autoComplete="new-street"
               value={inputsValue.street}
               onChange={handleInputsChange}
+              onBlur={handleInputsBlur}
             />
+            {errors.street && <Alert severity="error">{errors.street}</Alert>}
           </Grid>
           <Grid item xs={12} sm={4}>
             <TextField
@@ -217,10 +302,15 @@ const RegisterPage = () => {
               autoComplete="new-houseNumber"
               value={inputsValue.houseNumber}
               onChange={handleInputsChange}
+              onBlur={handleInputsBlur}
             />
+            {errors.houseNumber && (
+              <Alert severity="error">{errors.houseNumber}</Alert>
+            )}
           </Grid>
           <Grid item xs={12} sm={4}>
             <TextField
+              required
               fullWidth
               name="zip"
               label="Zip"
@@ -228,7 +318,9 @@ const RegisterPage = () => {
               autoComplete="new-zip"
               value={inputsValue.zip}
               onChange={handleInputsChange}
+              onBlur={handleInputsBlur}
             />
+            {errors.zip && <Alert severity="error">{errors.zip}</Alert>}
           </Grid>
           <Grid item xs={12}>
             <FormControlLabel
@@ -242,6 +334,7 @@ const RegisterPage = () => {
           fullWidth
           variant="contained"
           sx={{ mt: 3, mb: 2 }}
+          // disabled={Object.keys(errors).length > 0}
         >
           Sign Up
         </Button>

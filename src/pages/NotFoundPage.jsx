@@ -15,9 +15,10 @@ const NotFoundPage = () => {
         mt: 20,
       }}
     >
-      <Grid item lg={3} md={6} xs={12}></Grid>
-      <Typography variant="h1">404 Not Found</Typography>
-      <Grid item lg={3} md={6} xs={12}>
+      <Grid item lg={8} md={6} xs={12} sx={{ textAlign: "right" }}>
+        <Typography variant="h1">404 Not Found</Typography>
+      </Grid>
+      <Grid item lg={4} md={6} xs={12}>
         <IconButton>
           <DangerousIcon sx={{ fontSize: 200, color: "#1976D2" }} />
         </IconButton>
