@@ -35,10 +35,12 @@ import ROUTES from "./ROUTES";
 import AboutUsPage from "../pages/AboutUsPage";
 import EditCardPage from "../pages/EditCardPage";
 // import FirstComponent from "../sandbox/FirstComponent";
-
+import ProfilePage from "../pages/ProfilePage";
 import SandboxPage from "../sandbox/SandboxPage";
 import LifeCycleHooksPage from "../sandbox/LifeCycleHooksPage";
 import ContextPage from "../sandbox/ContextPage";
+import AuthGuard from "../guard/AuthGuard";
+import BizGuard from "../guard/BizGuard";
 
 const Router = () => {
   return (
@@ -49,8 +51,23 @@ const Router = () => {
       <Route path={ROUTES.ABOUT} element={<AboutUsPage />} />
       {/* <Route path="/edit/:id" element={<EditCardPage />} /> */}
       {/* !true way */}
-      {/* <Route path={`${ROUTES.EDITCARD}/:id`} element={<EditCardPage />} /> */}
-      <Route path={ROUTES.EDITCARD} element={<EditCardPage />} />
+      <Route
+        path={`${ROUTES.EDITCARD}/:id`}
+        element={
+          <BizGuard>
+            <EditCardPage />
+          </BizGuard>
+        }
+      />
+      {/* <Route path={ROUTES.EDITCARD} element={<EditCardPage />} /> */}
+      <Route
+        path="/profile"
+        element={
+          <AuthGuard>
+            <ProfilePage />
+          </AuthGuard>
+        }
+      />
 
       {/* 
       

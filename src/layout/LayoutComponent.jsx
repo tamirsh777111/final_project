@@ -8,8 +8,13 @@ import MainComponent from "./main/MainComponent";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import tmc from "twin-moon-color";
 import CssBaseline from "@mui/material/CssBaseline";
+import UseAutoLogin from "../hooks/UseAutoLogin";
+
+import Typography from "@mui/material/Typography";
 
 const LayoutComponent = ({ children }) => {
+  const finishAutoLogin = UseAutoLogin();
+
   const themes = tmc({
     "text.headerColorColor": "!gray",
     "text.headerActive": "*white",
@@ -23,6 +28,9 @@ const LayoutComponent = ({ children }) => {
     setDarkTheme(cheked);
   };
 
+  if (!finishAutoLogin) {
+    return <Typography>Loading...</Typography>;
+  }
   return (
     <ThemeProvider theme={isDarkTheme ? darkMode : lightMode}>
       <CssBaseline />
@@ -32,7 +40,13 @@ const LayoutComponent = ({ children }) => {
       />
       {/* <LoginPage />
       <RegisterPage /> */}
-      <MainComponent>{children} </MainComponent>
+      <MainComponent>
+        {finishAutoLogin ? (
+          children
+        ) : (
+          <Typography variant="h1">Loading...</Typography>
+        )}
+      </MainComponent>
       <FooterComponent />
     </ThemeProvider>
   );

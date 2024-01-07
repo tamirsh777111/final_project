@@ -2,10 +2,12 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import CardComponent from "../../components/CardComponent";
 // import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // import ROUTES from "../../routes/ROUTES";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import ROUTES from "../../routes/ROUTES";
 
 // let initialDataFromServer = [
 //   {
@@ -72,6 +74,7 @@ import axios from "axios";
 
 const HomePage = () => {
   const [dataFromServer, setDataFromServer] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -98,7 +101,9 @@ const HomePage = () => {
   };
   const handleEditCard = (id) => {
     console.log("father: card to edit", id);
+    navigate(`${ROUTES.EDITCARD}/${id}`);
   };
+
   const handleCallCard = (id) => {
     console.log("father: card to edit", id);
   };
