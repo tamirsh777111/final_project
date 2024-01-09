@@ -1,7 +1,5 @@
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-/* mui hooks */
-
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import {
   Avatar,
@@ -29,7 +27,6 @@ import validateLogin, {
 } from "../../validation/loginValidation";
 
 const LoginPage = () => {
-  /* top lvl for hooks */
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -40,30 +37,16 @@ const LoginPage = () => {
 
   const navigate = useNavigate();
   const { setLogin } = useContext(LoginContext);
-  /**
-   * const emailArrState = useState("")
-   * let emailValue = emailArrState[0] -> value of current state
-   * !never modify emailValue 😡
-   * let setEmailValue = emailArrState[1] -> function to update the state
-   */
-  /* logic lvl for js */
+
   const handleEmailChange = (e) => {
-    // console.log(e.target.value);
     setEmailValue(e.target.value);
   };
   const handlePasswordChange = (e) => {
-    // console.log(e.target.value);
     setPasswordValue(e.target.value);
   };
   const handleSubmit = async (e) => {
-    e.preventDefault(); //stop refresh
-    //status ok from server
+    e.preventDefault();
     try {
-      // let dataFromJoi = validateLogin({
-      //   email: emailValue,
-      //   password: passwordValue,
-      // });
-      // console.log("dataFromJoi", dataFromJoi);
       let { data } = await axios.post("/users/login", {
         email: emailValue,
         password: passwordValue,

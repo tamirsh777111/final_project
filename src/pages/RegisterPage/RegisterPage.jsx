@@ -23,7 +23,6 @@ import {
 } from "../../validation/registerValidation";
 
 const RegisterPage = () => {
-  //eman, asaf, rawunak
   const [inputsValue, setInputsValue] = useState({
     first: "",
     middle: "",
@@ -64,19 +63,11 @@ const RegisterPage = () => {
   };
 
   const handleInputsBlur = (e) => {
-    /**
-     * validateSchema[e.target.id] -> function to validate the current input
-     * inputsValue[e.target.id] -> the value inside the input
-     */
     let dataFromJoi = validateSchema[e.target.id]({
       [e.target.id]: inputsValue[e.target.id],
     });
-    /*
-      {email:emailValue}
-    */
-    console.log("dataFromJoi", dataFromJoi);
+
     if (dataFromJoi.error) {
-      // setPasswordError(dataFromJoi.error.details[0].message);
       setErrors((copyOfErrors) => ({
         ...copyOfErrors,
         [e.target.id]: dataFromJoi.error.details[0].message,
@@ -87,11 +78,6 @@ const RegisterPage = () => {
         return { ...copyOfErrors };
       });
     }
-    // if (dataFromJoi.error) {
-    //   setPasswordError(dataFromJoi.error.details[0].message);
-    // } else {
-    //   setPasswordError("");
-    // }
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -139,7 +125,6 @@ const RegisterPage = () => {
               fullWidth
               id="first"
               label="First Name"
-              // autoFocus
               value={inputsValue.first}
               onChange={handleInputsChange}
               onBlur={handleInputsBlur}
@@ -153,7 +138,6 @@ const RegisterPage = () => {
               fullWidth
               id="middle"
               label="Middle Name"
-              // autoFocus
               value={inputsValue.middle}
               onChange={handleInputsChange}
             />
@@ -334,7 +318,6 @@ const RegisterPage = () => {
           fullWidth
           variant="contained"
           sx={{ mt: 3, mb: 2 }}
-          // disabled={Object.keys(errors).length > 0}
         >
           Sign Up
         </Button>

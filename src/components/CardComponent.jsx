@@ -1,7 +1,5 @@
-// import ROUTES from "../../routes/ROUTES";
 import ROUTES from "../routes/ROUTES";
 import { useNavigate } from "react-router-dom";
-
 import {
   Card,
   CardHeader,
@@ -18,10 +16,7 @@ import ModeIcon from "@mui/icons-material/Mode";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import PropTypes from "prop-types";
-/**
- * title -> title
- * subtitle -> subheader
- */
+
 const CardComponent = ({
   title,
   subtitle,
@@ -35,8 +30,6 @@ const CardComponent = ({
   onCall,
   onFavorite,
 }) => {
-  // let { title, subtitle, img, body } = props;
-  // console.log(props);
   const handleDelteClick = () => {
     console.log("click in delete", id);
     onDelete(id);
@@ -47,7 +40,6 @@ const CardComponent = ({
     console.log("click in edit", id);
 
     onEdit(id);
-    // navigate(ROUTES.EDITCARD);
     navigate(`${ROUTES.EDITCARD}/${id}`);
   };
   const handleCallClick = () => {

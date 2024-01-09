@@ -1,76 +1,11 @@
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import CardComponent from "../../components/CardComponent";
-// import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-// import ROUTES from "../../routes/ROUTES";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import ROUTES from "../../routes/ROUTES";
-
-// let initialDataFromServer = [
-//   {
-//     id: "1",
-//     title: "title1",
-//     subtitle: "subtitle1",
-//     body: "body1",
-//     img: "/assets/imgs/car1.jpg",
-//   },
-//   {
-//     id: "2",
-//     title: "title2",
-//     subtitle: "subtitle2",
-//     body: "body2",
-//     img: "/assets/imgs/car2.jpg",
-//   },
-//   {
-//     id: "3",
-//     title: "title3",
-//     subtitle: "subtitle3",
-//     body: "body3",
-//     img: "/assets/imgs/car3.jpg",
-//   },
-//   {
-//     id: "4",
-//     title: "title4",
-//     subtitle: "subtitle4",
-//     body: "body4",
-//     img: "/assets/imgs/car4.jpg",
-//   },
-//   {
-//     id: "5",
-//     title: "title1",
-//     subtitle: "subtitle1",
-//     body: "body1",
-//     img: "/assets/imgs/car1.jpg",
-//   },
-//   {
-//     id: "6",
-//     title: "title2",
-//     subtitle: "subtitle2",
-//     body: "body2",
-//     img: "/assets/imgs/car2.jpg",
-//   },
-//   {
-//     id: "7",
-//     title: "title3",
-//     subtitle: "subtitle3",
-//     body: "body3",
-//     img: "/assets/imgs/car3.jpg",
-//   },
-//   {
-//     id: "8",
-//     title: "title4",
-//     subtitle: "subtitle4",
-//     body: "body4",
-//     img: "/assets/imgs/car4.jpg",
-//   },
-// ];
-
-// const initialDataFromServer = [];
-
-// https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards
 
 const HomePage = () => {
   const [dataFromServer, setDataFromServer] = useState([]);
