@@ -1,8 +1,6 @@
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
 import { Fragment } from "react";
-import WavingHandIcon from "@mui/icons-material/WavingHand";
 import styles from "../pages/AboutPageComponent.module.css";
 import Box from "@mui/material/Box";
 
@@ -11,22 +9,21 @@ const AboutUsPage = () => {
     <Fragment>
       <Box className={styles.body}>
         <Grid
-          // container
           spacing={2}
           sx={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            mt: 20,
           }}
         >
           <Grid item lg={3} md={10} xs={12} sx={{ textAlign: "right" }}>
-            <Typography variant="h1">Hello And How To Use</Typography>
+            <Typography variant="h1">How To Use</Typography>
           </Grid>
           <Grid item lg={3} md={2} xs={12}>
-            <IconButton>
-              <WavingHandIcon sx={{ fontSize: 200, color: "#1976D2" }} />
-            </IconButton>
+            <iframe
+              style={{ width: "300px", height: "300px", border: 0 }}
+              src="https://lottie.host/embed/1704e08b-2a2b-4958-94e2-c3d1997f75da/o1xY0ws9hj.json"
+            ></iframe>
           </Grid>
         </Grid>
         <h1 className={styles.h1}>

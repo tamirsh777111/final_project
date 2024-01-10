@@ -6,7 +6,6 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import tmc from "twin-moon-color";
 import CssBaseline from "@mui/material/CssBaseline";
 import UseAutoLogin from "../hooks/UseAutoLogin";
-
 import Typography from "@mui/material/Typography";
 
 const LayoutComponent = ({ children }) => {

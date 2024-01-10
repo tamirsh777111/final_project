@@ -21,7 +21,7 @@ import axios from "axios";
 import LoginContext from "../../store/loginContext";
 import { jwtDecode } from "jwt-decode";
 import { toast } from "react-toastify";
-import validateLogin, {
+import {
   validateEmailLogin,
   validatePasswordLogin,
 } from "../../validation/loginValidation";
@@ -30,11 +30,7 @@ const LoginPage = () => {
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const [emailError, setEmailError] = useState("");
-
   const [passwordError, setPasswordError] = useState("");
-
-  const [emailOrPassword, setEmailOrPassword] = useState("");
-
   const navigate = useNavigate();
   const { setLogin } = useContext(LoginContext);
 
@@ -52,10 +48,8 @@ const LoginPage = () => {
         password: passwordValue,
       });
 
-      console.log("data from axios", data);
       localStorage.setItem("token", data);
-      const decoded = jwtDecode(data); //convert token to object
-      console.log("decoded", decoded);
+      const decoded = jwtDecode(data);
       setLogin(decoded);
       toast.success("🦄 LoggedIn Successfully", {
         position: "top-right",
@@ -69,7 +63,6 @@ const LoginPage = () => {
       });
       navigate(ROUTES.HOME);
     } catch (err) {
-      console.log("err from axios", err);
       setLogin(null);
       localStorage.clear();
     }
