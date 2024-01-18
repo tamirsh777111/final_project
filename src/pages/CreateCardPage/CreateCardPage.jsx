@@ -76,6 +76,13 @@ const EditCardPage = () => {
         theme: "light",
       });
     }
+    console.log("test submit");
+    axios
+      .post("/cards", inputsValue)
+      .then(({ data }) => {
+        setInputsValue(fromServer(data));
+      })
+      .catch((err) => {});
   };
 
   const handleInputsBlur = (e) => {
@@ -131,9 +138,10 @@ const EditCardPage = () => {
         variant="contained"
         sx={{ mt: 3, mb: 2 }}
         disabled={Object.keys(errors).length > 0}
-        onSubmit={handleInputsSubmit}
+        // onSubmit={handleInputsSubmit}
+        onClick={handleInputsSubmit}
       >
-        Sign Up
+        Create card
       </Button>
     </Box>
   );

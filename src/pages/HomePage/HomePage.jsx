@@ -30,8 +30,12 @@ const HomePage = () => {
 
   const handleDeleteCard = (id) => {
     console.log("father: card to delete", id);
+    axios
+      .delete("/cards/" + id)
+      .then((data) => console.log(data))
+      .catch((err) => console.error(err));
     setDataFromServer((currentDataFromServer) =>
-      currentDataFromServer.filter((card) => card.id !== id)
+      currentDataFromServer.filter((card) => card._id !== id)
     );
     console.log({ dataFromServer });
   };
@@ -46,7 +50,9 @@ const HomePage = () => {
   const handleFavoriteCard = (id) => {
     axios
       .patch(`/cards/${id}`)
-      .then(({ data }) => {})
+      .then(({ data }) => {
+        console.log(data);
+      })
       .catch((err) => {
         console.log("error from axios", err);
       });
