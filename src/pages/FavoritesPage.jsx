@@ -5,6 +5,10 @@ import Grid from "@mui/material/Grid";
 import CardComponent from "../components/CardComponent";
 import ROUTES from "../routes/ROUTES";
 import { useNavigate } from "react-router-dom";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 const ProfilePage = () => {
   const navigate = useNavigate();
   const [cards, setCards] = useState([]);
@@ -33,7 +37,7 @@ const ProfilePage = () => {
 
   useEffect(() => {
     axios
-      .get("/cards")
+      .get("/cards/")
       .then(({ data }) => {
         setCards(
           data.filter((card) => {
@@ -50,8 +54,28 @@ const ProfilePage = () => {
   }, []);
   return (
     <Fragment>
-      <h1>Fav</h1>
-
+      <Box
+        sx={{
+          marginTop: 8,
+          marginBottom: 8,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Avatar
+          sx={{
+            m: 1,
+            bgcolor: "secondary.main",
+          }}
+        >
+          <FavoriteIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Favorites Cards{" "}
+        </Typography>
+      </Box>
       <Grid container spacing={2}>
         {cards.map((item, index) => (
           <Grid item lg={3} md={6} xs={12} key={"carsCard" + index}>

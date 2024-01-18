@@ -99,7 +99,7 @@ const CardComponent = ({
               <LocalPhoneIcon />
             </IconButton>
             <IconButton onClick={handleFavoriteClick}>
-              <FavoriteIcon />
+              <FavoriteIcon color={onFavorite ? "error" : "inherit"} />
             </IconButton>
           </Box>
         </Box>

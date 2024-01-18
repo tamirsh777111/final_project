@@ -2,13 +2,16 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import CardComponent from "../../components/CardComponent";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import ROUTES from "../../routes/ROUTES";
+import { FilterContext } from "../../store/filterContext";
 
 const HomePage = () => {
   const [dataFromServer, setDataFromServer] = useState([]);
   const navigate = useNavigate();
+  const { filterInput } = useContext(FilterContext);
+  console.log(dataFromServer);
 
   useEffect(() => {
     axios
@@ -43,9 +46,7 @@ const HomePage = () => {
   const handleFavoriteCard = (id) => {
     axios
       .patch(`/cards/${id}`)
-      .then(({ data }) => {
-        // update component state
-      })
+      .then(({ data }) => {})
       .catch((err) => {
         console.log("error from axios", err);
       });
@@ -53,23 +54,25 @@ const HomePage = () => {
 
   return (
     <Grid container spacing={2}>
-      {dataFromServer.map((item, index) => (
-        <Grid item lg={3} md={6} xs={12} key={"carsCard" + index}>
-          <CardComponent
-            id={item._id}
-            title={item.title}
-            subtitle={item.subtitle}
-            img={item.image.url}
-            phone={item.phone}
-            address={item.address}
-            cardNumber={item.bizNumber}
-            onDelete={handleDeleteCard}
-            onEdit={handleEditCard}
-            onCall={handleCallCard}
-            onFavorite={handleFavoriteCard}
-          />{" "}
-        </Grid>
-      ))}
+      {dataFromServer
+        .filter((item) => item.title.includes(filterInput))
+        .map((item, index) => (
+          <Grid item lg={3} md={6} xs={12} key={"carsCard" + index}>
+            <CardComponent
+              id={item._id}
+              title={item.title}
+              subtitle={item.subtitle}
+              img={item.image.url}
+              phone={item.phone}
+              address={item.address}
+              cardNumber={item.bizNumber}
+              onDelete={handleDeleteCard}
+              onEdit={handleEditCard}
+              onCall={handleCallCard}
+              onFavorite={handleFavoriteCard}
+            />{" "}
+          </Grid>
+        ))}
     </Grid>
   );
 };
