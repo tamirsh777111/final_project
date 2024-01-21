@@ -7,6 +7,7 @@ import TextInputComponent from "../../components/TextInputComponent";
 import validateSchema from "../../validation/cardValidation";
 import LoginContext from "../../store/loginContext";
 import { fromServer } from "./normalizeEdit";
+import { toast } from "react-toastify";
 
 const EditCardPage = () => {
   const [inputsValue, setInputsValue] = useState({
@@ -82,6 +83,27 @@ const EditCardPage = () => {
     }
   };
 
+  const handleInputsSubmit = () => {
+    if (!errors) {
+      toast.info("🦄 Wow so easy!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+    axios
+      .put("/cards/" + id, inputsValue)
+      .then(({ data }) => {
+        setInputsValue(fromServer(data));
+      })
+      .catch((err) => {});
+  };
+
   return (
     <Box
       sx={{
@@ -112,8 +134,14 @@ const EditCardPage = () => {
           ))}
         </Grid>
       </Box>
-      <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-        Sign Up
+      <Button
+        type="submit"
+        fullWidth
+        variant="contained"
+        sx={{ mt: 3, mb: 2 }}
+        onClick={handleInputsSubmit}
+      >
+        Edit card
       </Button>
     </Box>
   );

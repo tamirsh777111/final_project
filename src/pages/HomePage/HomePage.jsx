@@ -11,7 +11,6 @@ const HomePage = () => {
   const [dataFromServer, setDataFromServer] = useState([]);
   const navigate = useNavigate();
   const { filterInput } = useContext(FilterContext);
-  console.log(dataFromServer);
 
   useEffect(() => {
     axios

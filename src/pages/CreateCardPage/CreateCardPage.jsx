@@ -76,7 +76,6 @@ const EditCardPage = () => {
         theme: "light",
       });
     }
-    console.log("test submit");
     axios
       .post("/cards", inputsValue)
       .then(({ data }) => {

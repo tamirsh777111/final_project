@@ -9,11 +9,15 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import { useContext } from "react";
+import { FilterContext } from "../store/filterContext";
+
 const ProfilePage = () => {
   const navigate = useNavigate();
   const [cards, setCards] = useState([]);
   let token = localStorage.getItem("token");
   let { _id } = jwtDecode(token);
+  const { filterInput } = useContext(FilterContext);
 
   const handleDeleteCard = (id) => {
     console.log("father: card to delete", id);
@@ -77,23 +81,25 @@ const ProfilePage = () => {
         </Typography>
       </Box>
       <Grid container spacing={2}>
-        {cards.map((item, index) => (
-          <Grid item lg={3} md={6} xs={12} key={"carsCard" + index}>
-            <CardComponent
-              id={item._id}
-              title={item.title}
-              subtitle={item.subtitle}
-              img={item.image.url}
-              phone={item.phone}
-              address={item.address}
-              cardNumber={item.bizNumber}
-              onDelete={handleDeleteCard}
-              onEdit={handleEditCard}
-              onCall={handleCallCard}
-              onFavorite={handleFavoriteCard}
-            />{" "}
-          </Grid>
-        ))}
+        {cards
+          .filter((item) => item.title.includes(filterInput))
+          .map((item, index) => (
+            <Grid item lg={3} md={6} xs={12} key={"carsCard" + index}>
+              <CardComponent
+                id={item._id}
+                title={item.title}
+                subtitle={item.subtitle}
+                img={item.image.url}
+                phone={item.phone}
+                address={item.address}
+                cardNumber={item.bizNumber}
+                onDelete={handleDeleteCard}
+                onEdit={handleEditCard}
+                onCall={handleCallCard}
+                onFavorite={handleFavoriteCard}
+              />{" "}
+            </Grid>
+          ))}
       </Grid>
     </Fragment>
   );
