@@ -19,11 +19,13 @@ import LeftDrawerComponent from "./ui/LeftDrawerComponent";
 import { useState } from "react";
 import FilterComponent from "./ui/FilterComponent";
 import ROUTES from "../../routes/ROUTES";
+import { useNavigate } from "react-router-dom";
 
 const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -37,6 +39,15 @@ const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
   };
 
   const handleMenuClose = () => {
+    navigate(ROUTES.ABOUT);
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  };
+
+  const handleMenuCloseLogOut = () => {
+    localStorage.clear();
+    navigate(ROUTES.LOGIN);
+    window.location.reload(false);
     setAnchorEl(null);
     handleMobileMenuClose();
   };
@@ -73,8 +84,8 @@ const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose}>About</MenuItem>
+      <MenuItem onClick={handleMenuCloseLogOut}>LogOut</MenuItem>
     </Menu>
   );
 

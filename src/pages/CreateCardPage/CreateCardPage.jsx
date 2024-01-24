@@ -6,13 +6,16 @@ import axios from "axios";
 import TextInputComponent from "../../components/TextInputComponent";
 import validateSchema from "../../validation/cardValidation";
 import LoginContext from "../../store/loginContext";
-import { fromServer } from "../../pages/EditCardPage/normalizeEdit";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import normalizeCreate from "./normalizeCreate";
+import ROUTES from "../../routes/ROUTES";
 
 const EditCardPage = () => {
   const [inputsValue, setInputsValue] = useState({
+    name: "",
     title: "",
-    subTitle: "",
+    subtitle: "",
     description: "",
     phone: "",
     email: "",
@@ -25,10 +28,12 @@ const EditCardPage = () => {
     street: "",
     houseNumber: "",
     zip: "",
+    image: "",
   });
   const [errors, setErrors] = useState({
+    name: "",
     title: "",
-    subTitle: "",
+    subtitle: "",
     description: "",
     phone: "",
     email: "",
@@ -36,9 +41,11 @@ const EditCardPage = () => {
     city: "",
     street: "",
     houseNumber: "",
+    image: "",
   });
   let { id } = useParams();
   const { login } = useContext(LoginContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!id || !login) {
@@ -51,7 +58,7 @@ const EditCardPage = () => {
         } else {
         }
 
-        setInputsValue(fromServer(data));
+        setInputsValue(normalizeCreate(data));
       })
       .catch((err) => {});
   }, [id, login]);
@@ -63,9 +70,14 @@ const EditCardPage = () => {
       [e.target.id]: e.target.value,
     }));
   };
-  const handleInputsSubmit = () => {
-    if (!errors) {
-      toast.info("🦄 Wow so easy!", {
+
+  const handleInputsSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      console.log(normalizeCreate(inputsValue));
+      await axios.post("/cards", normalizeCreate(inputsValue));
+
+      toast("🦄 Create Card Successfully!", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -75,13 +87,10 @@ const EditCardPage = () => {
         progress: undefined,
         theme: "light",
       });
+      navigate(ROUTES.HOME);
+    } catch (err) {
+      console.log("error from axios", err);
     }
-    axios
-      .post("/cards", inputsValue)
-      .then(({ data }) => {
-        setInputsValue(fromServer(data));
-      })
-      .catch((err) => {});
   };
 
   const handleInputsBlur = (e) => {

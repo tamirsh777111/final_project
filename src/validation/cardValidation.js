@@ -4,8 +4,14 @@ import { validateEmailLogin, validatePasswordLogin } from "./loginValidation";
 const titleSchema = Joi.object({
   title: Joi.string().min(2).max(256).required(),
 });
+const nameSchema = Joi.object({
+  name: Joi.string().min(2).max(256).required(),
+});
 const subTitleSchema = Joi.object({
-  subTitle: Joi.string().min(2).max(256).required(),
+  subtitle: Joi.string().min(2).max(256).required(),
+});
+const idSchema = Joi.object({
+  _id: Joi.string().min(2).max(256).required(),
 });
 
 const phoneSchema = Joi.object({
@@ -29,13 +35,13 @@ const houseNumberSchema = Joi.object({
 });
 
 const urlSchema = Joi.object({
-  url: Joi.string().min(2).max(256).required(),
+  url: Joi.string().min(2).max(256),
 });
 const stateSchema = Joi.object({
-  state: Joi.string().min(2).max(256).required(),
+  state: Joi.string().min(2).max(256),
 });
 const webSchema = Joi.object({
-  web: Joi.string().min(2).max(256).required(),
+  web: Joi.string().min(2).max(256),
 });
 const altSchema = Joi.object({
   alt: Joi.string().min(2).max(256).required(),
@@ -44,15 +50,25 @@ const descriptionSchema = Joi.object({
   description: Joi.string().min(2).max(256).required(),
 });
 const zipSchema = Joi.object({
-  zip: Joi.string().min(2).max(256).required(),
+  zip: Joi.string().min(2).max(256),
+});
+const imageSchema = Joi.object({
+  image: Joi.string().min(2).max(256).required(),
+});
+const addressSchema = Joi.object({
+  address: Joi.string().min(2).max(256).required(),
 });
 
+const validateNameSchema = (name) => nameSchema.validate(name);
+const validateIdSchema = (_id) => idSchema.validate(_id);
+const validateAddressSchema = (address) => addressSchema.validate(address);
 const validateTitleSchema = (title) => titleSchema.validate(title);
 const validateUrlSchema = (url) => urlSchema.validate(url);
 const validateWebSchema = (web) => webSchema.validate(web);
 const validateStateSchema = (state) => stateSchema.validate(state);
 const validateAltSchema = (state) => altSchema.validate(state);
 const validateZipSchema = (zip) => zipSchema.validate(zip);
+const validateImageSchema = (image) => imageSchema.validate(image);
 
 const validateSubTitleSchema = (subTitle) => subTitleSchema.validate(subTitle);
 
@@ -72,11 +88,12 @@ const validateDescriptionSchema = (description) =>
 
 const validateSchema = {
   zip: validateZipSchema,
+  _id: validateIdSchema,
   alt: validateAltSchema,
   web: validateWebSchema,
   title: validateTitleSchema,
   state: validateStateSchema,
-  subTitle: validateSubTitleSchema,
+  subtitle: validateSubTitleSchema,
   phone: validatePhoneSchema,
   email: validateEmailLogin,
   password: validatePasswordLogin,
@@ -86,9 +103,14 @@ const validateSchema = {
   houseNumber: validateHouseNumberSchema,
   description: validateDescriptionSchema,
   url: validateUrlSchema,
+  image: validateImageSchema,
+  name: validateNameSchema,
+  address: validateAddressSchema,
 };
 
 export {
+  validateIdSchema,
+  validateAddressSchema,
   validateZipSchema,
   validateAltSchema,
   validateWebSchema,
@@ -104,6 +126,8 @@ export {
   validateStreetSchema,
   validateHouseNumberSchema,
   validateDescriptionSchema,
+  validateImageSchema,
+  validateNameSchema,
   validateSchema,
 };
 

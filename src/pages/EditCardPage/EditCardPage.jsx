@@ -6,13 +6,15 @@ import axios from "axios";
 import TextInputComponent from "../../components/TextInputComponent";
 import validateSchema from "../../validation/cardValidation";
 import LoginContext from "../../store/loginContext";
-import { fromServer } from "./normalizeEdit";
 import { toast } from "react-toastify";
+import normalizeEdit from "./normalizeEdit";
 
 const EditCardPage = () => {
   const [inputsValue, setInputsValue] = useState({
+    name: "",
     title: "",
-    subTitle: "",
+    subtitle: "",
+    _id: "",
     description: "",
     phone: "",
     email: "",
@@ -25,10 +27,11 @@ const EditCardPage = () => {
     street: "",
     houseNumber: "",
     zip: "",
+    image: "",
   });
   const [errors, setErrors] = useState({
     title: "",
-    subTitle: "",
+    subitle: "",
     description: "",
     phone: "",
     email: "",
@@ -50,7 +53,7 @@ const EditCardPage = () => {
         if (data.user_id === login._id || login.isAdmin) {
         } else {
         }
-        setInputsValue(fromServer(data));
+        setInputsValue(normalizeEdit(data));
       })
       .catch((err) => {
         console.log(err);
@@ -97,9 +100,9 @@ const EditCardPage = () => {
       });
     }
     axios
-      .put("/cards/" + id, inputsValue)
+      .put("/cards/" + id, normalizeEdit(inputsValue))
       .then(({ data }) => {
-        setInputsValue(fromServer(data));
+        setInputsValue(normalizeEdit(data));
       })
       .catch((err) => {});
   };

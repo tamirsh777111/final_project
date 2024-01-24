@@ -170,7 +170,7 @@ const LoginPage = () => {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link to={ROUTES.ABOUT} variant="body2">
                   Forgot password?
                 </Link>
               </Grid>
