@@ -4,12 +4,9 @@ const ComponentToKillComponent = () => {
   let intervalId;
 
   useEffect(() => {
-    intervalId = setInterval(() => {
-      console.log("here");
-    }, 1000);
+    intervalId = setInterval(() => {}, 1000);
     return () => {
       //this function will be executed when this component will be killed
-      console.log("component rip");
       clearInterval(intervalId);
     };
   }, []);

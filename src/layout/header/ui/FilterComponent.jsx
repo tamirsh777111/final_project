@@ -9,7 +9,6 @@ const FilterComponent = () => {
   const { filterInput, setFilterInput } = useContext(FilterContext);
   const handleInputChange = (e) => {
     setFilterInput(e.target.value);
-    console.log(filterInput);
   };
 
   return (

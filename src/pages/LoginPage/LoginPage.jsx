@@ -70,7 +70,6 @@ const LoginPage = () => {
 
   const handleEmailBlur = () => {
     let dataFromJoi = validateEmailLogin({ email: emailValue });
-    console.log("dataFromJoi", dataFromJoi);
     if (dataFromJoi.error) {
       setEmailError(dataFromJoi.error.details[0].message);
     } else {
@@ -79,7 +78,6 @@ const LoginPage = () => {
   };
   const handlePasswordBlur = () => {
     let dataFromJoi = validatePasswordLogin({ password: passwordValue });
-    console.log("dataFromJoi", dataFromJoi);
     if (dataFromJoi.error) {
       setPasswordError(dataFromJoi.error.details[0].message);
     } else {

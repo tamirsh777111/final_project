@@ -31,23 +31,18 @@ const CardComponent = ({
   onFavorite,
 }) => {
   const handleDelteClick = () => {
-    console.log("click in delete", id);
     onDelete(id);
   };
   const navigate = useNavigate();
 
   const handleEditClick = () => {
-    console.log("click in edit", id);
-
     onEdit(id);
     navigate(`${ROUTES.EDITCARD}/${id}`);
   };
   const handleCallClick = () => {
-    console.log("click in call", id);
     onCall(id);
   };
   const handleFavoriteClick = () => {
-    console.log("click in Favorite", id);
     onFavorite(id);
   };
 

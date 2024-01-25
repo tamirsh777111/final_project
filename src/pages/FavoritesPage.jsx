@@ -19,11 +19,8 @@ const ProfilePage = () => {
   let { _id } = jwtDecode(token);
   const { filterInput } = useContext(FilterContext);
 
-  const handleDeleteCard = (id) => {
-    console.log("father: card to delete", id);
-  };
+  const handleDeleteCard = (id) => {};
   const handleEditCard = (id) => {
-    console.log("father: card to edit", id);
     navigate(`${ROUTES.EDITCARD}/${id}`);
   };
 
@@ -34,9 +31,7 @@ const ProfilePage = () => {
     axios
       .patch(`/cards/${id}`)
       .then(({ data }) => {})
-      .catch((err) => {
-        console.log("error from axios", err);
-      });
+      .catch((err) => {});
   };
 
   useEffect(() => {
@@ -52,9 +47,7 @@ const ProfilePage = () => {
           })
         );
       })
-      .catch((err) => {
-        console.log("error from axios", err);
-      });
+      .catch((err) => {});
   }, []);
   return (
     <Fragment>

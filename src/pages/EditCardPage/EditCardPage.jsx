@@ -56,9 +56,7 @@ const EditCardPage = () => {
         }
         setInputsValue(normalizeEdit(data));
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, [id, login]);
   let keysArray = Object.keys(inputsValue);
 
@@ -73,7 +71,6 @@ const EditCardPage = () => {
     const { error } = validateSchema[e.target.id]({
       [e.target.id]: inputsValue[e.target.id],
     });
-    console.log({ error });
     if (error) {
       setErrors((cErrors) => ({
         ...cErrors,

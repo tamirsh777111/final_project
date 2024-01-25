@@ -96,9 +96,7 @@ const RegisterPage = () => {
       });
 
       navigate(ROUTES.LOGIN);
-    } catch (err) {
-      console.log("error from axios", err);
-    }
+    } catch (err) {}
   };
   return (
     <Box

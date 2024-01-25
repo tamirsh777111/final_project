@@ -7,9 +7,7 @@ import Button from "@mui/material/Button";
  */
 
 const ButtonComponent = ({ color, children }) => {
-  const handleBtnClick = () => {
-    console.log("you press on a btn");
-  };
+  const handleBtnClick = () => {};
   return (
     <Button variant="contained" color={color} onClick={handleBtnClick}>
       {children}

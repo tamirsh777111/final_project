@@ -18,9 +18,7 @@ const HomePage = () => {
       .then(({ data }) => {
         setDataFromServer(data);
       })
-      .catch((err) => {
-        console.log("error from axios", err);
-      });
+      .catch((err) => {});
   }, []);
 
   if (!dataFromServer || !dataFromServer.length) {
@@ -28,18 +26,15 @@ const HomePage = () => {
   }
 
   const handleDeleteCard = (id) => {
-    console.log("father: card to delete", id);
     axios
       .delete("/cards/" + id)
-      .then((data) => console.log(data))
+      .then((data) => {})
       .catch((err) => console.error(err));
     setDataFromServer((currentDataFromServer) =>
       currentDataFromServer.filter((card) => card._id !== id)
     );
-    console.log({ dataFromServer });
   };
   const handleEditCard = (id) => {
-    console.log("father: card to edit", id);
     navigate(`${ROUTES.EDITCARD}/${id}`);
   };
 
@@ -49,12 +44,8 @@ const HomePage = () => {
   const handleFavoriteCard = (id) => {
     axios
       .patch(`/cards/${id}`)
-      .then(({ data }) => {
-        console.log(data);
-      })
-      .catch((err) => {
-        console.log("error from axios", err);
-      });
+      .then(({ data }) => {})
+      .catch((err) => {});
   };
 
   return (

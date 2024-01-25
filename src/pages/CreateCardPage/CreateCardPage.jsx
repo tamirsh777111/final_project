@@ -74,7 +74,6 @@ const EditCardPage = () => {
   const handleInputsSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log(normalizeCreate(inputsValue));
       await axios.post("/cards", normalizeCreate(inputsValue));
 
       toast("🦄 Create Card Successfully!", {
@@ -88,9 +87,7 @@ const EditCardPage = () => {
         theme: "light",
       });
       navigate(ROUTES.HOME);
-    } catch (err) {
-      console.log("error from axios", err);
-    }
+    } catch (err) {}
   };
 
   const handleInputsBlur = (e) => {
