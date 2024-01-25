@@ -8,7 +8,8 @@ import validateSchema from "../../validation/cardValidation";
 import LoginContext from "../../store/loginContext";
 import { toast } from "react-toastify";
 import normalizeEdit from "./normalizeEdit";
-
+import { useNavigate } from "react-router-dom";
+import ROUTES from "../../routes/ROUTES";
 const EditCardPage = () => {
   const [inputsValue, setInputsValue] = useState({
     name: "",
@@ -42,7 +43,7 @@ const EditCardPage = () => {
   });
   let { id } = useParams();
   const { login } = useContext(LoginContext);
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (!id || !login) {
       return;
@@ -87,7 +88,7 @@ const EditCardPage = () => {
   };
 
   const handleInputsSubmit = () => {
-    if (!errors) {
+    if (errors) {
       toast.info("🦄 Wow so easy!", {
         position: "top-right",
         autoClose: 5000,
@@ -103,6 +104,7 @@ const EditCardPage = () => {
       .put("/cards/" + id, normalizeEdit(inputsValue))
       .then(({ data }) => {
         setInputsValue(normalizeEdit(data));
+        navigate(ROUTES.HOME);
       })
       .catch((err) => {});
   };
