@@ -6,7 +6,7 @@ import NotFoundPage from "../pages/NotFoundPage";
 import ROUTES from "./ROUTES";
 import AboutUsPage from "../pages/AboutUsPage";
 import EditCardPage from "../pages/EditCardPage/EditCardPage";
-import FavoritesPage from "../pages/FavoritesPage";
+import FavoritesPage from "../pages/FavoritesPage/FavoritesPage";
 import SandboxPage from "../sandbox/SandboxPage";
 import LifeCycleHooksPage from "../sandbox/LifeCycleHooksPage";
 import ContextPage from "../sandbox/ContextPage";

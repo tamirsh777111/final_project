@@ -3,7 +3,6 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
@@ -11,8 +10,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import MoreIcon from "@mui/icons-material/MoreVert";
-import { Switch } from "@mui/material";
 import { Link } from "react-router-dom";
 import Links from "./ui/Links";
 import LeftDrawerComponent from "./ui/LeftDrawerComponent";
@@ -20,7 +17,9 @@ import { useState } from "react";
 import FilterComponent from "./ui/FilterComponent";
 import ROUTES from "../../routes/ROUTES";
 import { useNavigate } from "react-router-dom";
-
+import ThemeBox from "./ui/boxes/ThemeBox";
+import Mobile from "./ui/boxes/Mobile";
+import Notes from "./ui/boxes/Notes";
 const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
@@ -155,74 +154,24 @@ const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
           >
             <MenuIcon />
           </IconButton>
-          {/* <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}
-          >
-            LOGO
-          </Typography> */}
           <Link to={ROUTES.HOME}>
             <img src="/assets/imgs/mainLogoNew.png" alt="LOGO" />
           </Link>
           <Links />
           <FilterComponent />
-          <Box
-            sx={{
-              my: 2,
-              p: 1,
-            }}
-          >
-            <Typography sx={{ display: { xs: "none", md: "inline" } }}>
-              {isDarkTheme ? "Dark" : "Light"} Mode
-            </Typography>
-            <Switch checked={isDarkTheme} onChange={handleThemeChange} />
-          </Box>
+          <ThemeBox
+            handleThemeChange={handleThemeChange}
+            isDarkTheme={isDarkTheme}
+          />
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <IconButton
-              size="large"
-              aria-label="show 4 new mails"
-              color="inherit"
-            >
-              <Badge badgeContent={4} color="error">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-          </Box>
-          <Box sx={{ display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
-          </Box>
+          <Notes
+            handleProfileMenuOpen={handleProfileMenuOpen}
+            menuId={menuId}
+          />
+          <Mobile
+            handleMobileMenuOpen={handleMobileMenuOpen}
+            mobileMenuId={mobileMenuId}
+          />
         </Toolbar>
       </AppBar>
       {renderMobileMenu}

@@ -1,112 +1,10 @@
-import { Fragment, useState } from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import ROUTES from '../../routes/ROUTES';
-import normalizeRegister from './normalizeRegister';
-import Alert from '@mui/material/Alert';
-import { toast } from 'react-toastify';
-import { validateSchema } from '../../validation/registerValidation';
-
-const RegisterPage = () => {
-  const [inputsValue, setInputsValue] = useState({
-    first: '',
-    middle: '',
-    last: '',
-    email: '',
-    password: '',
-    phone: '',
-    url: '',
-    alt: '',
-    state: '',
-    country: '',
-    city: '',
-    street: '',
-    houseNumber: '',
-    zip: '',
-  });
-
-  const [errors, setErrors] = useState({
-    first: '',
-    last: '',
-    email: '',
-    password: '',
-    phone: '',
-    country: '',
-    city: '',
-    street: '',
-    houseNumber: '',
-    zip: '',
-  });
-
-  const navigate = useNavigate();
-
-  const handleInputsChange = e => {
-    setInputsValue(CopyOfCurrentValue => ({
-      ...CopyOfCurrentValue,
-      [e.target.id]: e.target.value,
-    }));
-  };
-
-  const handleInputsBlur = e => {
-    let dataFromJoi = validateSchema[e.target.id]({
-      [e.target.id]: inputsValue[e.target.id],
-    });
-
-    if (dataFromJoi.error) {
-      setErrors(copyOfErrors => ({
-        ...copyOfErrors,
-        [e.target.id]: dataFromJoi.error.details[0].message,
-      }));
-    } else {
-      setErrors(copyOfErrors => {
-        delete copyOfErrors[e.target.id];
-        return { ...copyOfErrors };
-      });
-    }
-  };
-  const handleSubmit = async e => {
-    e.preventDefault();
-    try {
-      await axios.post('/users', normalizeRegister(inputsValue));
-
-      toast('🦄 Register Successfully!', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'light',
-      });
-
-      navigate(ROUTES.LOGIN);
-    } catch (err) {}
-  };
+import { Fragment } from 'react'
+import TextField from '@mui/material/TextField'
+import Alert from '@mui/material/Alert'
+import Grid from '@mui/material/Grid'
+const RegisterPageBoxAlt = ({ inputsValue, errors, handleInputsChange, handleInputsBlur }) => {
   return (
-    <Box
-      sx={{
-        marginTop: 8,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-      }}
-    >
-      <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-        <LockOutlinedIcon />
-      </Avatar>
-      <Typography component="h1" variant="h5">
-        Sign up
-      </Typography>
+    <Fragment>
       <Box component="form" noValidate sx={{ mt: 3 }} onSubmit={handleSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={4}>
@@ -160,24 +58,10 @@ const RegisterPage = () => {
           <Grid item xs={12} sm={4}>
             <TextField required fullWidth name="zip" label="Zip" id="zip" autoComplete="new-zip" value={inputsValue.zip} onChange={handleInputsChange} onBlur={handleInputsBlur} />
             {errors.zip && <Alert severity="error">{errors.zip}</Alert>}
-          </Grid>
-          <Grid item xs={12}>
-            <FormControlLabel control={<Checkbox value="allowExtraEmails" color="primary" />} label="Business Account" />
-          </Grid>
-        </Grid>
-        <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-          Sign Up
-        </Button>
-        <Grid container justifyContent="flex-end">
-          <Grid item>
-            <Link to={ROUTES.LOGIN} variant="body2">
-              Already have an account? Sign in
-            </Link>
-          </Grid>
+          </Grid>{' '}
         </Grid>
       </Box>
-    </Box>
-  );
-};
-
-export default RegisterPage;
+    </Fragment>
+  )
+}
+export default RegisterPageBoxAlt
