@@ -29,7 +29,7 @@ const HomePage = () => {
     axios
       .delete('/cards/' + id)
       .then(data => {})
-      .catch(err => console.error(err));
+      .catch(Error);
     setDataFromServer(currentDataFromServer => currentDataFromServer.filter(card => card._id !== id));
   };
   const handleEditCard = id => {

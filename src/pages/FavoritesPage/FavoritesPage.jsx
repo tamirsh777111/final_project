@@ -23,9 +23,7 @@ const ProfilePage = () => {
   const handleFavoriteCard = id => {
     axios
       .patch(`/cards/${id}`)
-      .then(({ data }) => {
-        console.log(data);
-      })
+      .then(({ data }) => {})
       .catch(err => {});
   };
 
