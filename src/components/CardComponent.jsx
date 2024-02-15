@@ -44,13 +44,13 @@ const CardComponent = ({ title, likes, subtitle, img, phone, address, cardNumber
       <CardContent>
         <Typography>
           <Typography component="span" fontWeight={700}>
-            Phone:{' '}
+            Phone of the car owner:{' '}
           </Typography>
           {phone}
         </Typography>
         <Typography>
           <Typography component="span" fontWeight={700}>
-            Address:{' '}
+            The location of the car:{' '}
           </Typography>
           {`city - ${address.city}
            | street - ${address.street} 
@@ -59,7 +59,7 @@ const CardComponent = ({ title, likes, subtitle, img, phone, address, cardNumber
         </Typography>
         <Typography>
           <Typography component="span" fontWeight={700}>
-            Card number:{' '}
+            Car number:{' '}
           </Typography>
           {cardNumber}
         </Typography>

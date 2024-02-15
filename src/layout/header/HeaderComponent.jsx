@@ -1,25 +1,25 @@
-import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Badge from "@mui/material/Badge";
-import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import MailIcon from "@mui/icons-material/Mail";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import { Link } from "react-router-dom";
-import Links from "./ui/Links";
-import LeftDrawerComponent from "./ui/LeftDrawerComponent";
-import { useState } from "react";
-import FilterComponent from "./ui/FilterComponent";
-import ROUTES from "../../routes/ROUTES";
-import { useNavigate } from "react-router-dom";
-import ThemeBox from "./ui/boxes/ThemeBox";
-import Mobile from "./ui/boxes/Mobile";
-import Notes from "./ui/boxes/Notes";
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Badge from '@mui/material/Badge';
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import MailIcon from '@mui/icons-material/Mail';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import { Link } from 'react-router-dom';
+import Links from './ui/Links';
+import LeftDrawerComponent from './ui/LeftDrawerComponent';
+import { useState } from 'react';
+import FilterComponent from './ui/FilterComponent';
+import ROUTES from '../../routes/ROUTES';
+import { useNavigate } from 'react-router-dom';
+import ThemeBox from './ui/boxes/ThemeBox';
+import Mobile from './ui/boxes/Mobile';
+import Notes from './ui/boxes/Notes';
 const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
@@ -29,7 +29,7 @@ const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const handleProfileMenuOpen = (event) => {
+  const handleProfileMenuOpen = event => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -51,11 +51,11 @@ const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
     handleMobileMenuClose();
   };
 
-  const handleMobileMenuOpen = (event) => {
+  const handleMobileMenuOpen = event => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  const handleThemeChange = (event) => {
+  const handleThemeChange = event => {
     onThemeChange(event.target.checked);
   };
 
@@ -66,19 +66,19 @@ const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
     setIsOpen(false);
   };
 
-  const menuId = "primary-search-account-menu";
+  const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
+        vertical: 'top',
+        horizontal: 'right',
       }}
       id={menuId}
       keepMounted
       transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
+        vertical: 'top',
+        horizontal: 'right',
       }}
       open={isMenuOpen}
       onClose={handleMenuClose}
@@ -88,19 +88,19 @@ const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
     </Menu>
   );
 
-  const mobileMenuId = "primary-search-account-menu-mobile";
+  const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
+        vertical: 'top',
+        horizontal: 'right',
       }}
       id={mobileMenuId}
       keepMounted
       transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
+        vertical: 'top',
+        horizontal: 'right',
       }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
@@ -114,11 +114,7 @@ const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
         <p>Messages!!</p>
       </MenuItem>
       <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
+        <IconButton size="large" aria-label="show 17 new notifications" color="inherit">
           <Badge badgeContent={17} color="error">
             <NotificationsIcon />
           </Badge>
@@ -126,13 +122,7 @@ const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
         <p>Notifications</p>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
+        <IconButton size="large" aria-label="account of current user" aria-controls="primary-search-account-menu" aria-haspopup="true" color="inherit">
           <AccountCircle />
         </IconButton>
         <p>Profile</p>
@@ -144,14 +134,7 @@ const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
     <Box sx={{ flexGrow: 1, mb: 2 }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-            onClick={handleOpenDrawerClick}
-          >
+          <IconButton size="large" edge="start" color="inherit" aria-label="open drawer" sx={{ mr: 2 }} onClick={handleOpenDrawerClick}>
             <MenuIcon />
           </IconButton>
           <Link to={ROUTES.HOME}>
@@ -159,27 +142,15 @@ const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
           </Link>
           <Links />
           <FilterComponent />
-          <ThemeBox
-            handleThemeChange={handleThemeChange}
-            isDarkTheme={isDarkTheme}
-          />
+          <ThemeBox handleThemeChange={handleThemeChange} isDarkTheme={isDarkTheme} />
           <Box sx={{ flexGrow: 1 }} />
-          <Notes
-            handleProfileMenuOpen={handleProfileMenuOpen}
-            menuId={menuId}
-          />
-          <Mobile
-            handleMobileMenuOpen={handleMobileMenuOpen}
-            mobileMenuId={mobileMenuId}
-          />
+          <Notes handleProfileMenuOpen={handleProfileMenuOpen} menuId={menuId} />
+          <Mobile handleMobileMenuOpen={handleMobileMenuOpen} mobileMenuId={mobileMenuId} />
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
-      <LeftDrawerComponent
-        isOpen={isOpen}
-        onCloseDrawer={handleCloseDrawerClick}
-      />
+      <LeftDrawerComponent isOpen={isOpen} onCloseDrawer={handleCloseDrawerClick} />
     </Box>
   );
 };

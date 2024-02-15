@@ -1,47 +1,47 @@
-import { useEffect, useState, useContext } from "react";
-import { useParams } from "react-router-dom";
-import { Box, Avatar, Typography, Grid, Button } from "@mui/material";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import axios from "axios";
-import TextInputComponent from "../../components/TextInputComponent";
-import validateSchema from "../../validation/cardValidation";
-import LoginContext from "../../store/loginContext";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import normalizeCreate from "./normalizeCreate";
-import ROUTES from "../../routes/ROUTES";
+import { useEffect, useState, useContext } from 'react';
+import { useParams } from 'react-router-dom';
+import { Box, Avatar, Typography, Grid, Button } from '@mui/material';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import axios from 'axios';
+import TextInputComponent from '../../components/TextInputComponent';
+import validateSchema from '../../validation/cardValidation';
+import LoginContext from '../../store/loginContext';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import normalizeCreate from './normalizeCreate';
+import ROUTES from '../../routes/ROUTES';
 
 const EditCardPage = () => {
   const [inputsValue, setInputsValue] = useState({
-    name: "",
-    title: "",
-    subtitle: "",
-    description: "",
-    phone: "",
-    email: "",
-    web: "",
-    url: "",
-    alt: "",
-    state: "",
-    country: "",
-    city: "",
-    street: "",
-    houseNumber: "",
-    zip: "",
-    image: "",
+    name: '',
+    title: '',
+    subtitle: '',
+    description: '',
+    phone: '',
+    email: '',
+    web: '',
+    url: '',
+    alt: '',
+    state: '',
+    country: '',
+    city: '',
+    street: '',
+    houseNumber: '',
+    zip: '',
+    image: '',
   });
   const [errors, setErrors] = useState({
-    name: "",
-    title: "",
-    subtitle: "",
-    description: "",
-    phone: "",
-    email: "",
-    country: "",
-    city: "",
-    street: "",
-    houseNumber: "",
-    image: "",
+    name: '',
+    title: '',
+    subtitle: '',
+    description: '',
+    phone: '',
+    email: '',
+    country: '',
+    city: '',
+    street: '',
+    houseNumber: '',
+    image: '',
   });
   let { id } = useParams();
   const { login } = useContext(LoginContext);
@@ -52,7 +52,7 @@ const EditCardPage = () => {
       return;
     }
     axios
-      .get("/cards/" + id)
+      .get('/cards/' + id)
       .then(({ data }) => {
         if (data.user_id === login._id || login.isAdmin) {
         } else {
@@ -60,47 +60,47 @@ const EditCardPage = () => {
 
         setInputsValue(normalizeCreate(data));
       })
-      .catch((err) => {});
+      .catch(err => {});
   }, [id, login]);
   let keysArray = Object.keys(inputsValue);
 
-  const handleInputsChange = (e) => {
-    setInputsValue((cInputsValue) => ({
+  const handleInputsChange = e => {
+    setInputsValue(cInputsValue => ({
       ...cInputsValue,
       [e.target.id]: e.target.value,
     }));
   };
 
-  const handleInputsSubmit = async (e) => {
+  const handleInputsSubmit = async e => {
     e.preventDefault();
     try {
-      await axios.post("/cards", normalizeCreate(inputsValue));
+      await axios.post('/cards', normalizeCreate(inputsValue));
 
-      toast("🦄 Create Card Successfully!", {
-        position: "top-right",
+      toast('🦄 Create Card Successfully!', {
+        position: 'top-right',
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "light",
+        theme: 'light',
       });
       navigate(ROUTES.HOME);
     } catch (err) {}
   };
 
-  const handleInputsBlur = (e) => {
+  const handleInputsBlur = e => {
     const { error } = validateSchema[e.target.id]({
       [e.target.id]: inputsValue[e.target.id],
     });
     if (error) {
-      setErrors((cErrors) => ({
+      setErrors(cErrors => ({
         ...cErrors,
         [e.target.id]: error.details[0].message,
       }));
     } else {
-      setErrors((cErrors) => {
+      setErrors(cErrors => {
         delete cErrors[e.target.id];
         return { ...cErrors };
       });
@@ -111,29 +111,21 @@ const EditCardPage = () => {
     <Box
       sx={{
         marginTop: 8,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
       }}
     >
-      <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+      <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
         <LockOutlinedIcon />
       </Avatar>
       <Typography component="h1" variant="h5">
-        Create a card
+        Create a card of a car for purchase
       </Typography>
       <Box component="form" noValidate sx={{ mt: 3 }}>
         <Grid container spacing={2}>
-          {keysArray.map((keyName) => (
-            <TextInputComponent
-              key={"inputs" + keyName}
-              id={keyName}
-              label={keyName}
-              value={inputsValue[keyName]}
-              onChange={handleInputsChange}
-              onBlur={handleInputsBlur}
-              errors={errors[keyName]}
-            />
+          {keysArray.map(keyName => (
+            <TextInputComponent key={'inputs' + keyName} id={keyName} label={keyName} value={inputsValue[keyName]} onChange={handleInputsChange} onBlur={handleInputsBlur} errors={errors[keyName]} />
           ))}
         </Grid>
       </Box>

@@ -48,7 +48,7 @@ const ProfilePage = () => {
           <FavoriteIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Favorites Cards{' '}
+          Favorites Cars{' '}
         </Typography>
       </Box>
       <FavoritesBox handleDeleteCard={handleDeleteCard} handleEditCard={handleEditCard} handleCallCard={handleCallCard} handleFavoriteCard={handleFavoriteCard} />{' '}
