@@ -11,7 +11,7 @@ import { useEffect, useState } from 'react';
 
 const CardComponent = ({ title, likes, subtitle, img, phone, address, cardNumber, id, onDelete, onEdit, onCall, onFavorite }) => {
   let token = localStorage.getItem('token');
-  let { _id } = jwtDecode(token);
+  let { _id } = token ? jwtDecode(token) : '';
   const [isLiked, setIsLiked] = useState(likes.some(like => like === _id));
 
   useEffect(() => {

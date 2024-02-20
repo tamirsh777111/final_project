@@ -76,7 +76,7 @@ const RegisterPage = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      await axios.post('/users', normalizeRegister(inputsValue));
+      await axios.post('/users/register', normalizeRegister(inputsValue));
 
       toast('🦄 Register Successfully!', {
         position: 'top-right',

@@ -1,17 +1,16 @@
-import { Routes, Route } from "react-router-dom";
-import HomePage from "../pages/HomePage/HomePage";
-import LoginPage from "../pages/LoginPage/LoginPage";
-import RegisterPage from "../pages/RegisterPage/RegisterPage";
-import NotFoundPage from "../pages/NotFoundPage";
-import ROUTES from "./ROUTES";
-import AboutUsPage from "../pages/AboutUsPage";
-import EditCardPage from "../pages/EditCardPage/EditCardPage";
-import FavoritesPage from "../pages/FavoritesPage/FavoritesPage";
-import SandboxPage from "../sandbox/SandboxPage";
-import LifeCycleHooksPage from "../sandbox/LifeCycleHooksPage";
-import ContextPage from "../sandbox/ContextPage";
-import AuthGuard from "../guard/AuthGuard";
-import CreateCardPage from "../pages/CreateCardPage/CreateCardPage";
+import { Routes, Route } from 'react-router-dom';
+import HomePage from '../pages/HomePage/HomePage';
+import LoginPage from '../pages/LoginPage/LoginPage';
+import RegisterPage from '../pages/RegisterPage/RegisterPage';
+import NotFoundPage from '../pages/NotFoundPage';
+import ROUTES from './ROUTES';
+import AboutUsPage from '../pages/AboutUsPage';
+import EditCardPage from '../pages/EditCardPage/EditCardPage';
+import FavoritesPage from '../pages/FavoritesPage/FavoritesPage';
+import SandboxPage from '../sandbox/SandboxPage';
+import LifeCycleHooksPage from '../sandbox/LifeCycleHooksPage';
+import AuthGuard from '../guard/AuthGuard';
+import CreateCardPage from '../pages/CreateCardPage/CreateCardPage';
 
 const Router = () => {
   return (
@@ -50,7 +49,6 @@ const Router = () => {
       <Route path="/sandbox" element={<SandboxPage />}>
         <Route path="lch" element={<LifeCycleHooksPage />} />
       </Route>
-      <Route path="/context" element={<ContextPage />} />
 
       <Route path="*" element={<NotFoundPage />} />
     </Routes>

@@ -13,8 +13,6 @@ import ViewListIcon from '@mui/icons-material/ViewList';
 import ViewModuleIcon from '@mui/icons-material/ViewModule';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import AboutUsPage from '../AboutUsPage';
-import EditCardPage from '../CreateCardPage/CreateCardPage';
 
 const HomePage = () => {
   const [dataFromServer, setDataFromServer] = useState([]);
@@ -88,7 +86,7 @@ const HomePage = () => {
         {dataFromServer
           .filter(item => item.title.includes(filterInput))
           .map((item, index) => (
-            <Grid item lg={activepage ? 3 : 12} md={6} xs={12} key={'carsCard' + index}>
+            <Grid item lg={activepage ? 3 : 12} md={activepage ? 6 : 12} xs={12} key={'carsCard' + index}>
               <CardComponent
                 id={item._id}
                 title={item.title}
