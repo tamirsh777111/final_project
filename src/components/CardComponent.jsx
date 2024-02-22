@@ -14,10 +14,6 @@ const CardComponent = ({ title, likes, subtitle, img, phone, address, cardNumber
   let { _id } = token ? jwtDecode(token) : '';
   const [isLiked, setIsLiked] = useState(likes.some(like => like === _id));
 
-  useEffect(() => {
-    setIsLiked(likes.some(like => like === _id));
-  }, [likes.length]);
-
   const handleDelteClick = () => {
     onDelete(id);
   };
@@ -32,6 +28,7 @@ const CardComponent = ({ title, likes, subtitle, img, phone, address, cardNumber
   };
   const handleFavoriteClick = () => {
     onFavorite(id);
+    setIsLiked(prev => !prev);
   };
 
   return (
